@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 import os
 import csv
+import time
 from datetime import datetime
 
 ####################################################################################################################################
 def main():
     # This section will get the file we need with its path and open it with a csv reader
+    startTime = time.perf_counter()
     pathName = os.getcwd() + "/ExcelFiles/"
     fileNames = os.listdir(pathName)
     if fileNames[0].endswith(".csv"):
@@ -23,6 +25,8 @@ def main():
     # This section will get the lowest sugar
     lowest = getLowestSugar(sugars)
 
+    endTime = time.perf_counter()
+    runTime = endTime - startTime
 # General print statements for debugging
     # print(sugars)
     # print(len(sugars))
@@ -30,6 +34,7 @@ def main():
     print("A1C: ", a1c)
     print("Highest: ", highest)
     print("Lowest: ", lowest)
+    print("Runtime: ", runTime, "seconds")
 ####################################################################################################################################
 def getSugarsFromFile(file):
     # This section will get all of the sugar values we need from the csv file, remove the first 10 we dont need, and return them
