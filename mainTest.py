@@ -2,8 +2,6 @@
 import os
 import csv
 from datetime import datetime
-from keyword import iskeyword
-import math
 
 ####################################################################################################################################
 def main():
