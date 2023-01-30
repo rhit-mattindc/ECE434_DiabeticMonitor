@@ -10,11 +10,19 @@ def main():
     startTime = time.perf_counter()
     pathName = os.getcwd() + "/ExcelFiles/"
     fileNames = os.listdir(pathName)
-    if fileNames[0].endswith(".csv"):
-        pathName += fileNames[0]
-    else:
-        print("ERROR! No .csv file found")
-        return
+    newestDate = datetime(year = 2000, month = 1, day = 1)
+    newestFile = ""
+    newestTime = datetime.strptime("00::00::00", '%H::%M::%S').time()
+    for i in range(0, len(fileNames)):
+        if (fileNames[i].endswith(".csv")):
+            currentD = getDate(fileNames[i])
+            currentT = getTimeCentral(fileNames[i])
+            if (currentD >= newestDate):
+                if (currentT > newestTime):
+                    newestDate = currentD
+                    newestTime = currentT
+                    newestFile = fileNames[i]
+    pathName += newestFile
     filename = open(pathName, "r")
     file = csv.DictReader(filename)
     # This section will get the column of sugar values
@@ -22,7 +30,7 @@ def main():
     # This section will get the date
     currentDate = getDate(fileNames[0])
     # This section will get the time
-    currentTime = getTime(fileNames[0])
+    currentTime = getTimeEastern(fileNames[0])
     # This section will get the A1C value from these sugars
     a1c = getA1C(sugars)
     # This section will get the Highest sugar
@@ -72,7 +80,16 @@ def getDate(fileName):
         currentDate = datetime(year = int(fileName[29:33]), month = int(fileName[34:36]), day = int(fileName[37:39]))
     return currentDate
 ####################################################################################################################################
-def getTime(fileName):
+def getTimeCentral(fileName):
+    if fileName.endswith(".csv"):
+        hour = fileName[40:42]
+        minute = fileName[42:44]
+        second = fileName[44:46]
+        centralTime = hour + "::" + minute + "::" + second
+        currentTime = datetime.strptime(centralTime, '%H::%M::%S').time()
+    return currentTime
+####################################################################################################################################
+def getTimeEastern(fileName):
     if fileName.endswith(".csv"):
         hour = fileName[40:42]
         minute = fileName[42:44]
