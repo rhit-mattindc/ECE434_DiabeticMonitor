@@ -28,9 +28,9 @@ def main():
     # This section will get the column of sugar values
     sugars = getSugarsFromFile(file)
     # This section will get the date
-    currentDate = getDate(fileNames[0])
+    currentDate = getDate(newestFile)
     # This section will get the time
-    currentTime = getTimeEastern(fileNames[0])
+    currentTime = getTimeEastern(newestFile)
     # This section will get the A1C value from these sugars
     a1c = getA1C(sugars)
     # This section will get the Highest sugar
