@@ -17,11 +17,10 @@ def main():
         if (fileNames[i].endswith(".csv")):
             currentD = getDate(fileNames[i])
             currentT = getTimeCentral(fileNames[i])
-            if (currentD >= newestDate):
-                if (currentT > newestTime):
-                    newestDate = currentD
-                    newestTime = currentT
-                    newestFile = fileNames[i]
+            if (currentD >= newestDate and currentT > newestTime):
+                newestDate = currentD
+                newestTime = currentT
+                newestFile = fileNames[i]
     pathName += newestFile
     filename = open(pathName, "r")
     file = csv.DictReader(filename)
@@ -33,6 +32,10 @@ def main():
     currentTime = getTimeEastern(newestFile)
     # This section will get the A1C value from these sugars
     a1c = getA1C(sugars)
+    # This section will get the current sugar
+    currentSugar = getCurrentSugar(sugars)
+    # This section will sort the sugars from lowest to highest
+    sugars.sort()
     # This section will get the Highest sugar
     highest = getHighestSugar(sugars)
     # This section will get the lowest sugar
@@ -46,6 +49,7 @@ def main():
     print("Date: ", currentDate.strftime('%m-%d-%Y'))
     print("Time: ", currentTime)
     print("A1C: ", a1c)
+    print("Current: ", currentSugar)
     print("Highest: ", highest)
     print("Lowest: ", lowest)
     print("Runtime: ", runTime, "seconds")
@@ -135,15 +139,17 @@ def getTimeEastern(fileName):
         currentTime = datetime.strptime(easternTimeStandard, '%H::%M::%S').time()
     return currentTime
 ####################################################################################################################################
+def getCurrentSugar(sugars):
+    return sugars[-1]
+####################################################################################################################################
 def getHighestSugar(sugars):
-    sugars.sort()
     return sugars[-1]
 ####################################################################################################################################
 def getLowestSugar(sugars):
-    sugars.sort()
     return sugars[0]
 ####################################################################################################################################
 # This is a call to main to get the ball rolling
-main()
+if __name__ == '__main__':
+    main()
 # END FILE
 ####################################################################################################################################
