@@ -43,12 +43,12 @@ def main():
 
     endTime = time.perf_counter()
     runTime = endTime - startTime
-    # General print statements for debugging
+    ########## General print statements for debugging ##########
     # print(sugars)
     # print(len(sugars))
     print("Date: ", currentDate.strftime('%m-%d-%Y'))
     print("Time: ", currentTime)
-    print("A1C: ", a1c)
+    print("A1C: ", round(a1c, 1))
     print("Current: ", currentSugar)
     print("Highest: ", highest)
     print("Lowest: ", lowest)
