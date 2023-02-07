@@ -33,13 +33,13 @@ def main():
     # This section will get the A1C value from these sugars
     a1c = getA1C(sugars)
     # This section will get the current sugar
-    currentSugar = getCurrentSugar(sugars)
+    currentSugar = sugars[-1]
     # This section will sort the sugars from lowest to highest
     sugars.sort()
     # This section will get the Highest sugar
-    highest = getHighestSugar(sugars)
+    highest = sugars[-1]
     # This section will get the lowest sugar
-    lowest = getLowestSugar(sugars)
+    lowest = sugars[0]
 
     endTime = time.perf_counter()
     runTime = endTime - startTime
@@ -138,15 +138,6 @@ def getTimeEastern(fileName):
         easternTimeStandard = hour + "::" + minute + "::" + second
         currentTime = datetime.strptime(easternTimeStandard, '%H::%M::%S').time()
     return currentTime
-####################################################################################################################################
-def getCurrentSugar(sugars):
-    return sugars[-1]
-####################################################################################################################################
-def getHighestSugar(sugars):
-    return sugars[-1]
-####################################################################################################################################
-def getLowestSugar(sugars):
-    return sugars[0]
 ####################################################################################################################################
 # This is a call to main to get the ball rolling
 if __name__ == '__main__':
