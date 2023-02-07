@@ -2,6 +2,7 @@
 import os
 import csv
 import time
+import numpy
 from datetime import datetime
 
 ####################################################################################################################################
@@ -69,7 +70,7 @@ def getSugarsFromFile(file):
         tempArray.remove(value)
     # This will turn all strings to ints
     tempArray2 = [int(numeric_string) for numeric_string in tempArray]
-    return tempArray2
+    return numpy.array(tempArray2)
 ####################################################################################################################################
 def getA1C(sugars):
     averageSugar = getAverage(sugars)
@@ -77,7 +78,8 @@ def getA1C(sugars):
     return a1c
 ####################################################################################################################################
 def getAverage(sugars):
-    return sum(sugars) / len(sugars)
+    # return sum(sugars) / len(sugars)
+    return numpy.average(sugars)
 ####################################################################################################################################
 def getDate(fileName):
     if fileName.endswith(".csv"):
