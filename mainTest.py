@@ -2,7 +2,8 @@
 import os
 import csv
 import time
-import numpy
+import subprocess
+import shlex
 from datetime import datetime
 
 ####################################################################################################################################
@@ -44,6 +45,8 @@ def main():
 
     endTime = time.perf_counter()
     runTime = endTime - startTime
+    # This section will display the info to the LCD screen
+    subprocess.call(shlex.split(f"./text.sh {currentDate.strftime('%m-%d-%Y')} {currentTime} {round(a1c, 1)} {currentSugar} {highest} {lowest} {round(runTime, 2)}"))
     ########## General print statements for debugging ##########
     # print(sugars)
     # print(len(sugars))
@@ -53,7 +56,7 @@ def main():
     print("Current: ", currentSugar)
     print("Highest: ", highest)
     print("Lowest: ", lowest)
-    print("Runtime: ", runTime, "seconds")
+    print("Runtime: ", round(runTime, 2), "seconds")
 ####################################################################################################################################
 def getSugarsFromFile(file):
     # This section will get all of the sugar values we need from the csv file, remove the first 10 we dont need, and return them
@@ -70,7 +73,7 @@ def getSugarsFromFile(file):
         tempArray.remove(value)
     # This will turn all strings to ints
     tempArray2 = [int(numeric_string) for numeric_string in tempArray]
-    return numpy.array(tempArray2)
+    return tempArray2
 ####################################################################################################################################
 def getA1C(sugars):
     averageSugar = getAverage(sugars)
@@ -78,8 +81,7 @@ def getA1C(sugars):
     return a1c
 ####################################################################################################################################
 def getAverage(sugars):
-    # return sum(sugars) / len(sugars)
-    return numpy.average(sugars)
+    return sum(sugars) / len(sugars)
 ####################################################################################################################################
 def getDate(fileName):
     if fileName.endswith(".csv"):
