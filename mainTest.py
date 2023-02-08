@@ -8,6 +8,22 @@ import Adafruit_BBIO.GPIO as GPIO
 from datetime import datetime
 
 ####################################################################################################################################
+# For the LEDs with 220 Ohm resistors:
+#     Red is P9_11
+#     Green is P9_15
+#     Blue is P9_21
+#     Yellow is P9_23
+# The LCD is connected to SPI 1:
+#     VCC is P9_4
+#     GND is P9_2
+#     CS is P9_28
+#     RESET is P9_25
+#     D/C is P9_27
+#     MOSI is P9_30
+#     SCK is P9_31
+#     LED is P9_16
+#     MISO is P9_29
+####################################################################################################################################
 def main():
     # This section will get the file we need with its path and open it with a csv reader
     systemRunningLED(True)
@@ -166,6 +182,10 @@ def sugarLevelLED(currentSugar):
     elif (currentSugar <= 70):
         GPIO.output(RED, GPIO.LOW)
         GPIO.output(GREEN, GPIO.LOW)
+        GPIO.output(BLUE, GPIO.HIGH)
+    else:
+        GPIO.output(RED, GPIO.HIGH)
+        GPIO.output(GREEN, GPIO.HIGH)
         GPIO.output(BLUE, GPIO.HIGH)
 ####################################################################################################################################
 def systemRunningLED(running):
