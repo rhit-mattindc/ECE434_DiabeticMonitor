@@ -4,11 +4,13 @@ import csv
 import time
 import subprocess
 import shlex
+import Adafruit_BBIO.GPIO as GPIO
 from datetime import datetime
 
 ####################################################################################################################################
 def main():
     # This section will get the file we need with its path and open it with a csv reader
+    systemRunningLED(True)
     startTime = time.perf_counter()
     pathName = os.getcwd() + "/ExcelFiles/"
     fileNames = os.listdir(pathName)
@@ -45,8 +47,11 @@ def main():
 
     endTime = time.perf_counter()
     runTime = endTime - startTime
+    systemRunningLED(False)
     # This section will display the info to the LCD screen
     subprocess.call(shlex.split(f"./text.sh {currentDate.strftime('%m-%d-%Y')} {currentTime} {round(a1c, 1)} {currentSugar} {highest} {lowest} {round(runTime, 2)}"))
+    # This section will handle the LEDs
+    sugarLevelLED(currentSugar)
     ########## General print statements for debugging ##########
     # print(sugars)
     # print(len(sugars))
@@ -142,6 +147,34 @@ def getTimeEastern(fileName):
         easternTimeStandard = hour + "::" + minute + "::" + second
         currentTime = datetime.strptime(easternTimeStandard, '%H::%M::%S').time()
     return currentTime
+####################################################################################################################################
+def sugarLevelLED(currentSugar):
+    RED = "P9_11"
+    GREEN = "P9_15"
+    BLUE = "P9_21"
+    GPIO.setup(RED, GPIO.OUT)
+    GPIO.setup(GREEN, GPIO.OUT)
+    GPIO.setup(BLUE, GPIO.OUT)
+    if (currentSugar >= 170):
+        GPIO.output(RED, GPIO.HIGH)
+        GPIO.output(GREEN, GPIO.LOW)
+        GPIO.output(BLUE, GPIO.LOW)
+    elif (currentSugar < 170 and currentSugar > 70):
+        GPIO.output(RED, GPIO.LOW)
+        GPIO.output(GREEN, GPIO.HIGH)
+        GPIO.output(BLUE, GPIO.LOW)
+    elif (currentSugar <= 70):
+        GPIO.output(RED, GPIO.LOW)
+        GPIO.output(GREEN, GPIO.LOW)
+        GPIO.output(BLUE, GPIO.HIGH)
+####################################################################################################################################
+def systemRunningLED(running):
+    YELLOW = "P9_23"
+    GPIO.setup(YELLOW, GPIO.OUT)
+    if (running):
+        GPIO.output(YELLOW, GPIO.HIGH)
+    else:
+        GPIO.output(YELLOW, GPIO.LOW)
 ####################################################################################################################################
 # This is a call to main to get the ball rolling
 if __name__ == '__main__':
