@@ -6,6 +6,7 @@ import subprocess
 import shlex
 import Adafruit_BBIO.GPIO as GPIO
 from datetime import datetime
+from subprocess import call
 
 ####################################################################################################################################
 # For the LEDs with 220 Ohm resistors:
@@ -44,7 +45,7 @@ def main():
     pathName += newestFile
     filename = open(pathName, "r")
     file = csv.DictReader(filename)
-    # This section will get the column of sugar values
+    # This section will get the column of sugar values *****THIS IS WHAT TAKES SO LONG*****
     sugars = getSugarsFromFile(file)
     # This section will get the date
     currentDate = getDate(newestFile)
@@ -198,6 +199,7 @@ def systemRunningLED(running):
 ####################################################################################################################################
 # This is a call to main to get the ball rolling
 if __name__ == '__main__':
+    newExcelPull = call("./getNewExcel.sh", shell=True)
     main()
 # END FILE
 ####################################################################################################################################
