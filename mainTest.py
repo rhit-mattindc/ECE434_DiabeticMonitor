@@ -30,18 +30,7 @@ def main():
     systemRunningLED(True)
     startTime = time.perf_counter()
     pathName = os.getcwd() + "/ExcelFiles/"
-    fileNames = os.listdir(pathName)
-    newestDate = datetime(year = 2000, month = 1, day = 1)
-    newestFile = ""
-    newestTime = datetime.strptime("00::00::00", '%H::%M::%S').time()
-    for i in range(0, len(fileNames)):
-        if (fileNames[i].endswith(".csv")):
-            currentD = getDate(fileNames[i])
-            currentT = getTimeCentral(fileNames[i])
-            if (currentD >= newestDate and currentT > newestTime):
-                newestDate = currentD
-                newestTime = currentT
-                newestFile = fileNames[i]
+    newestFile = getNewestFile(pathName)
     pathName += newestFile
     filename = open(pathName, "r")
     file = csv.DictReader(filename)
@@ -64,11 +53,11 @@ def main():
 
     endTime = time.perf_counter()
     runTime = endTime - startTime
-    systemRunningLED(False)
     # This section will display the info to the LCD screen
     subprocess.call(shlex.split(f"./text.sh {currentDate.strftime('%m-%d-%Y')} {currentTime} {round(a1c, 1)} {currentSugar} {highest} {lowest} {round(runTime, 2)}"))
     # This section will handle the LEDs
     sugarLevelLED(currentSugar)
+    systemRunningLED(False)
     ########## General print statements for debugging ##########
     # print(sugars)
     # print(len(sugars))
@@ -79,6 +68,18 @@ def main():
     print("Highest: ", highest)
     print("Lowest: ", lowest)
     print("Runtime: ", round(runTime, 2), "seconds")
+####################################################################################################################################
+def getNewestFile(pathName):
+    fileNames = os.listdir(pathName)
+    newestDate = datetime(2000, 1, 1, 1, 00, 00)
+    newestFile = ""
+    for i in range(0, len(fileNames)):
+        if (fileNames[i].endswith(".csv")):
+            currentDate = getDate(fileNames[i])
+            if ((currentDate - newestDate).total_seconds() > 0):
+                newestDate = currentDate
+                newestFile = fileNames[i]
+    return newestFile
 ####################################################################################################################################
 def getSugarsFromFile(file):
     # This section will get all of the sugar values we need from the csv file, remove the first 10 we dont need, and return them
@@ -107,17 +108,8 @@ def getAverage(sugars):
 ####################################################################################################################################
 def getDate(fileName):
     if fileName.endswith(".csv"):
-        currentDate = datetime(year = int(fileName[29:33]), month = int(fileName[34:36]), day = int(fileName[37:39]))
+        currentDate = datetime(year = int(fileName[29:33]), month = int(fileName[34:36]), day = int(fileName[37:39]), hour = int(fileName[40:42]), minute = int(fileName[42:44]), second = int(fileName[44:46]))
     return currentDate
-####################################################################################################################################
-def getTimeCentral(fileName):
-    if fileName.endswith(".csv"):
-        hour = fileName[40:42]
-        minute = fileName[42:44]
-        second = fileName[44:46]
-        centralTime = hour + "::" + minute + "::" + second
-        currentTime = datetime.strptime(centralTime, '%H::%M::%S').time()
-    return currentTime
 ####################################################################################################################################
 def getTimeEastern(fileName):
     if fileName.endswith(".csv"):
