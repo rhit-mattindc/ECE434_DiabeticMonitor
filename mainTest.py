@@ -33,9 +33,9 @@ def main():
     newestFile = getNewestFile(pathName)
     pathName += newestFile
     filename = open(pathName, "r")
-    file = csv.DictReader(filename)
+    file = csv.reader(filename)
     # This section will get the column of sugar values *****THIS IS WHAT TAKES SO LONG*****
-    sugars = getSugarsFromFile(file)
+    sugars = getSugarsFromFileBetter(file)
     # This section will get the date
     currentDate = getDate(newestFile)
     # This section will get the time
@@ -97,6 +97,23 @@ def getSugarsFromFile(file):
     # This will turn all strings to ints
     tempArray2 = [int(numeric_string) for numeric_string in tempArray]
     return tempArray2
+####################################################################################################################################
+def getSugarsFromFileBetter(file):
+    tempArray = []
+    skip = 0
+    index = 0
+    for row in file:
+        if (skip <= 10):
+            skip += 1
+        else:
+            for col in row:
+                if (index % 7 == 0 and index % 2 != 0):
+                    if (col == "High"):
+                        tempArray.append(450)
+                    else:
+                        tempArray.append(int(col))
+                index += 1
+    return tempArray
 ####################################################################################################################################
 def getA1C(sugars):
     averageSugar = getAverage(sugars)
@@ -191,7 +208,7 @@ def systemRunningLED(running):
 ####################################################################################################################################
 # This is a call to main to get the ball rolling
 if __name__ == '__main__':
-    newExcelPull = call("./getNewExcel.sh", shell=True)
+    # newExcelPull = call("./getNewExcel.sh", shell=True)
     main()
 # END FILE
 ####################################################################################################################################
