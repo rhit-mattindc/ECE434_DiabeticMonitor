@@ -1,0 +1,22 @@
+[Unit]
+Description=flask server
+#Documentation=https://github.com/coder/code-server/tree/main/docs
+Wants=network.target dphys-swapfile.service
+After=multi-user.target
+
+[Service]
+Type=exec
+User=debian
+Group=debian
+WorkingDirectory=/home/debian/ECE434_DiabeticMonitor
+#ExecStartPre=/bin/ln -sf /opt/vsx-examples/examples/ /home/debian/
+#ExecStartPre=/bin/mkdir -p /home/debian/.local/share/code-server/User/
+#ExecStartPre=/bin/cp /opt/vsx-examples/examples/settings.json /home/debian/.local/share/code-server/User/
+#ExecStart=/home/debian/ECE434_DiabeticMonitor/setup.sh --cert --auth none --disable-telemetry --disable-update-check
+ExecStart=/home/debian/ECE434_DiabeticMonitor/setup.sh
+SyslogIdentifier=diabetes
+Restart=always
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target
