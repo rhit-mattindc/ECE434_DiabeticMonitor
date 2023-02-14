@@ -42,4 +42,4 @@ Highest Sugar: XXX
 Lowest Sugar: XXX  
 Computation Time: X.XX seconds  
   
-Next
+The board will also turn on a different colored LED based on the Current Sugar value. If the blood sugar is HIGH (>170), it will turn on the Red, if the blood sugar is GOOD(<170, >70) it will turn Green, and if it is LOW(<70) it will turn Blue. Also, while the project is running and doing its calculations, it will light up the Yellow LED as an assurance that the project is doing something.
