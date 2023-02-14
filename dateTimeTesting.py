@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import datetime as dt
 
 yesterday = dt.datetime(2013,12,30,23,59,59) 

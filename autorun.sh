@@ -1,10 +1,10 @@
 #!/bin/sh
-# File Name: install.sh
-# Author: David Mattingly, Eddie Mayfield
+# File Name: autorun.sh
+# Author: David Mattingly, Eddie Mannan
 # Date Created: 13FEB2023
 # Date last edited: 13FEB2023
 # Topic: ECE434 Embedded Linux, Dr. Yoder
 # Project: Diabetic Monitor
-# Description: 
+# Description: Tells the Kernal what to run when the Beagle first boots
 
 echo 'hi'
