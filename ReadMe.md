@@ -33,13 +33,13 @@ Run install.sh
 ## Project Discription
 This project is meant to make handling Type 1 Diabetes easier. The project will take a Dexcom .csv file full of blood sugar data, pull the values from this file, and output various data points to the user such as:
 
-Eddie Mannan Dexcom Monitor
-Date: XX-XX-XXXX
-Time: XX:XX:XX
-A1C: XXX
-Current Sugar: XXX
-Highest Sugar: XXX
-Lowest Sugar: XXX
-Computation Time: X.XX seconds
-
+Eddie Mannan Dexcom Monitor  
+Date: XX-XX-XXXX  
+Time: XX:XX:XX  
+A1C: XXX  
+Current Sugar: XXX  
+Highest Sugar: XXX  
+Lowest Sugar: XXX  
+Computation Time: X.XX seconds  
+  
 Next
