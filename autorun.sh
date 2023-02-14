@@ -7,4 +7,4 @@
 # Project: Diabetic Monitor
 # Description: Tells the Kernal what to run when the Beagle first boots
 
-echo 'hi'
+python3 mainTest.py
