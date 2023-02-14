@@ -5,12 +5,12 @@ Embedded Linux Final Project
 
 Eddie Mannan, David Mattingly
 
+## Install
+
+Clone this repository under the name ECE434_DiabeticMonitor and run install.sh
+
 ## Setup
-
-### Install
-
-Clone this repository under the name ECE434_DiabeticMonitor.
-Run install.sh
+Run setup.sh, and it should take care of everything.
 
 ### Pinout
 
