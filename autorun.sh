@@ -7,7 +7,9 @@
 # Project: Diabetic Monitor
 # Description: Called by crontab, runs the main code
 
+cd /home/debian/ECE434_DiabeticMonitor
+
 git pull
 
-python3 /home/debain/ECE434_DiabeticMonitor/mainTest.py
+python3 mainTest.py
 

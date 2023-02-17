@@ -9,6 +9,7 @@
 
 # Install modules/packages
 apt install fbi
+apt install imagemagick
 
 # Add device tree to uEnv.txt
 line=$(grep "uboot_overlay_addr4" /boot/uEnv.txt)
@@ -18,7 +19,7 @@ sed -i "s|$line|uboot_overlay_addr4=BB-LCD-ADAFRUIT-24-SPI1-00A0.dtbo|g" /boot/u
 git config pull.rebase false
 
 # Configure autorun in crontab
-if ! grep -q "Diabetic" /etc/crontab; then
+if ! grep -q "DiabeticMonitor" /etc/crontab; then
     echo "*/5 * * * * debian /home/debian/ECE434_DiabeticMonitor/autorun.sh" >> /etc/crontab
 fi
 
