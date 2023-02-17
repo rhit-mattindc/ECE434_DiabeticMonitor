@@ -8,7 +8,13 @@ import Adafruit_BBIO.GPIO as GPIO
 from datetime import datetime
 from subprocess import call
 ####################################################################################################################################
-
+# File Name: mainTest.py
+# Author: David Mattingly, Eddie Mannan
+# Date Created: 12DEC2022
+# Date last edited: 12DEC2022
+# Topic: ECE434 Embedded Linux, Dr. Yoder
+# Project: Diabetic Monitor
+# Description: This program will look at an Excel sheet of blood sugar values, crunch some numbers, then display it in multiple ways
 ####################################################################################################################################
 # For the LEDs with 220 Ohm resistors:
 #     Red is P9_11
