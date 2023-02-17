@@ -20,7 +20,7 @@ git config pull.rebase false
 
 # Configure autorun in crontab
 if ! grep -q "DiabeticMonitor" /etc/crontab; then
-    echo "*/5 * * * * debian /home/debian/ECE434_DiabeticMonitor/autorun.sh" >> /etc/crontab
+    echo "*/5 * * * * root /home/debian/ECE434_DiabeticMonitor/autorun.sh 2>&1 | logger" >> /etc/crontab
 fi
 
 echo "Reboot device to enable device overlay"
