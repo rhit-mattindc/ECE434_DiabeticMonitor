@@ -7,24 +7,20 @@
 # Project: Diabetic Monitor
 # Description: Sets the program to run every 5 minutes
 
-echo 'Warning: install requires a reboot to enable the FBI device tree.'
-echo 'Enter ABORT to go back and save work, anything else to run install.'
-# read userinput
-
-# if $userinput -eq 'ABORT'; then
-#     exit 1
-# fi
-
 # Install modules/packages
-# apt install fbi
+apt install fbi
+
+# Add device tree to uEnv.txt
+line=$(grep "uboot_overlay_addr4" /boot/uEnv.txt)
+sed -i "s|$line|uboot_overlay_addr4=BB-LCD-ADAFRUIT-24-SPI1-00A0.dtbo|g" /boot/uEnv.txt
 
 # Configure git
-# git config pull.rebase false
+git config pull.rebase false
 
 # Configure autorun in crontab
 if ! grep -q "Diabetic" /etc/crontab; then
     echo "*/5 * * * * debian /home/debian/ECE434_DiabeticMonitor/autorun.sh" >> /etc/crontab
 fi
 
-# reboot
+echo "Reboot device to enable device overlay"
 
