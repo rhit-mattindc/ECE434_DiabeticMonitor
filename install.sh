@@ -9,11 +9,11 @@
 
 echo 'Warning: install requires a reboot to enable the FBI device tree.'
 echo 'Enter ABORT to go back and save work, anything else to run install.'
-read userinput
+# read userinput
 
-if $userinput -eq 'ABORT'; then
-    exit 1
-fi
+# if $userinput -eq 'ABORT'; then
+#     exit 1
+# fi
 
 # Install modules/packages
 # apt install fbi
@@ -23,7 +23,7 @@ fi
 
 # Configure autorun in crontab
 if ! grep -q "Diabetic" /etc/crontab; then
-    echo "*/1 * * * * debian ~/ECE434_DiabeticMonitor/autorun.sh >> ~/ECE434_DiabeticMonitor/cron.log" >> /etc/crontab
+    echo "*/5 * * * * debian /home/debian/ECE434_DiabeticMonitor/autorun.sh" >> /etc/crontab
 fi
 
 # reboot
