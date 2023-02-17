@@ -7,4 +7,8 @@
 # Project: Diabetic Monitor
 # Description: Tells the Kernal what to run when the Beagle first boots
 
-echo 'hi'
+git pull
+
+python3 mainTest.py
+
+echo 'hi' >> ~/ECE434_DiabeticMonitor/cronlog.txt
