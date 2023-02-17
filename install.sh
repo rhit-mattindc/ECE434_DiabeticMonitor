@@ -13,7 +13,7 @@ apt install imagemagick
 
 # Add device tree to uEnv.txt
 line=$(grep "uboot_overlay_addr4" /boot/uEnv.txt)
-sed -i "s|$line|uboot_overlay_addr4=BB-LCD-ADAFRUIT-24-SPI1-00A0.dtbo|g" /boot/uEnv.txt
+sed -i "s|$line|uboot_overlay_addr4=/lib/firmware/BB-LCD-ADAFRUIT-24-SPI1-00A0.dtbo|g" /boot/uEnv.txt
 
 # Configure git
 git config pull.rebase false
