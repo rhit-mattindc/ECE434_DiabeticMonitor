@@ -9,7 +9,5 @@
 
 cd /home/debian/ECE434_DiabeticMonitor
 
-git pull
-
 python3 mainTest.py
 
