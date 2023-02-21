@@ -7,4 +7,4 @@
 # Project: Diabetic Monitor
 # Description: Pulls the new Excel files from git
 cd /home/debian/ECE434_DiabeticMonitor
-git pull https://rhit-mattindc:workingfarmingrailroadchestnut@github.com/rhit-mattindc/ECE434_DiabeticMonitor
+git pull https://github.com/rhit-mattindc/ECE434_DiabeticMonitor

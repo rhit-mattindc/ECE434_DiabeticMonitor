@@ -17,6 +17,7 @@ sed -i "s|$line|uboot_overlay_addr4=/lib/firmware/BB-LCD-ADAFRUIT-24-SPI1-00A0.d
 
 # Configure git
 git config pull.rebase false
+git config --global --add safe.directory /home/debian/ECE434_DiabeticMonitor
 
 # Configure autorun in crontab
 if ! grep -q "DiabeticMonitor" /etc/crontab; then
