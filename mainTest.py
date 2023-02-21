@@ -232,7 +232,7 @@ def systemRunningLED(running):
 ####################################################################################################################################
 # This is a call to main to get the ball rolling
 if __name__ == '__main__':
-    # newExcelPull = call("./getNewExcel.sh", shell=True)
+    newExcelPull = call("./getNewExcel.sh", shell=True)
     main()
 # END FILE
 ####################################################################################################################################
