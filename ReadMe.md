@@ -3,7 +3,7 @@
 
 Embedded Linux Final Project
 
-Eddie Mannan, David Mattingly
+Eddie Mannan and David Mattingly
 
 ## Install
 
